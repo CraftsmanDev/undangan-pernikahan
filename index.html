@@ -756,77 +756,6 @@
         }
 
         /* Story Section */
-        .story-section {
-            background: var(--navy-dark);
-        }
-
-        .timeline {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-        }
-
-        .timeline-item {
-            padding: 20px 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .timeline-item:nth-child(odd) {
-            flex-direction: row;
-            padding-right: calc(50% + 30px);
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
-            padding-left: calc(50% + 30px);
-            text-align: left;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 16px;
-            height: 16px;
-            background: var(--gold);
-            border-radius: 50%;
-            border: 3px solid var(--navy-dark);
-            z-index: 2;
-        }
-
-        .timeline-content h3 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.5rem;
-            color: var(--gold);
-            margin-bottom: 5px;
-        }
-
-        .timeline-content .timeline-date {
-            font-size: 0.75rem;
-            color: var(--gold-light);
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .timeline-content p {
-            font-size: 0.85rem;
-            color: rgba(245, 240, 225, 0.7);
-            line-height: 1.5;
-        }
-
         /* Gallery Section */
         .gallery-section {
             background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-dark) 100%);
@@ -834,9 +763,9 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            max-width: 900px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -862,6 +791,17 @@
             font-size: 3rem;
             color: var(--gold);
             opacity: 0.3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
 
         .gallery-item::after {
@@ -1159,14 +1099,6 @@
                 max-width: 350px;
             }
 
-            .timeline-item:nth-child(odd),
-            .timeline-item:nth-child(even) {
-                padding-left: calc(50% + 25px);
-                padding-right: 0;
-                text-align: left;
-                flex-direction: row-reverse;
-            }
-
             .person-photo {
                 width: 160px;
                 height: 160px;
@@ -1393,64 +1325,6 @@
         </div>
     </section>
 
-    <!-- Story Section -->
-    <section class="story-section" id="story">
-        <div class="section-divider animate-on-scroll">
-            <div class="line"></div>
-            <div class="diamond"></div>
-            <div class="line"></div>
-        </div>
-        <div class="section-title animate-on-scroll">Perjalanan cinta kami</div>
-
-        <div class="timeline">
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Pertama Bertemu</h3>
-                    <div class="timeline-date">Maret 2020</div>
-                    <p>Pertama kali bertemu di kampus saat acara seminar nasional. Senyumnya yang hangat membuat hari
-                        itu begitu berkesan.</p>
-                </div>
-            </div>
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Mulai Dekat</h3>
-                    <div class="timeline-date">Juni 2020</div>
-                    <p>Sering menghabiskan waktu bersama, dari diskusi tugas hingga jalan-jalan sore. Perasaan itu
-                        perlahan tumbuh.</p>
-                </div>
-            </div>
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Menjadi Sepasang Kekasih</h3>
-                    <div class="timeline-date">Desember 2020</div>
-                    <p>Dengan bismillah, memutuskan untuk menjalin hubungan yang lebih serius dengan tujuan yang jelas.
-                    </p>
-                </div>
-            </div>
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Lamaran</h3>
-                    <div class="timeline-date">Februari 2026</div>
-                    <p>Alhamdulillah, lamaran diterima dengan baik. Kedua keluarga memberikan restu dengan penuh
-                        kebahagiaan.</p>
-                </div>
-            </div>
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <h3>Hari Bahagia</h3>
-                    <div class="timeline-date">02 Agustus 2026</div>
-                    <p>InsyaAllah hari yang ditunggu-tunggu. Saatnya kita melangkah ke jenjang pernikahan yang penuh
-                        berkah.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Gallery Section -->
     <section class="gallery-section" id="gallery">
         <div class="section-divider animate-on-scroll">
@@ -1463,22 +1337,16 @@
 
         <div class="gallery-grid">
             <div class="gallery-item animate-on-scroll">
-                <span class="gallery-placeholder">&#128247;</span>
+                <img src="foto mempelai wanita.jpeg" alt="Momen Bahagia 1">
             </div>
             <div class="gallery-item animate-on-scroll">
-                <span class="gallery-placeholder">&#128247;</span>
+                <img src="foto mempelai wanita.jpeg" alt="Momen Bahagia 2">
             </div>
             <div class="gallery-item animate-on-scroll">
-                <span class="gallery-placeholder">&#128247;</span>
+                <img src="foto mempelai wanita.jpeg" alt="Momen Bahagia 3">
             </div>
             <div class="gallery-item animate-on-scroll">
-                <span class="gallery-placeholder">&#128247;</span>
-            </div>
-            <div class="gallery-item animate-on-scroll">
-                <span class="gallery-placeholder">&#128247;</span>
-            </div>
-            <div class="gallery-item animate-on-scroll">
-                <span class="gallery-placeholder">&#128247;</span>
+                <img src="foto mempelai wanita.jpeg" alt="Momen Bahagia 4">
             </div>
         </div>
     </section>
