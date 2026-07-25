@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan - Jihan & Partner</title>
+    <title>Undangan Pernikahan - Irfan & Jihan</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap"
         rel="stylesheet">
@@ -204,71 +204,85 @@
             text-align: center;
             z-index: 10;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
 
         .bismillah {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--gold-light);
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             opacity: 0;
             animation: fadeInDown 1s ease 0.5s forwards;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
 
         .cover-subtitle {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--gold);
             text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
+            letter-spacing: 6px;
+            margin-bottom: 5px;
             opacity: 0;
             animation: fadeInDown 1s ease 0.8s forwards;
         }
 
+        .cover-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 8px 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
         .couple-names {
             font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
+            font-size: 3.8rem;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin: 10px 0;
+            margin: 2px 0;
+            padding: 0;
             opacity: 0;
             animation: fadeInUp 1.2s ease 1s forwards;
             text-shadow: none;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         .couple-and {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
             color: var(--gold);
-            font-style: italic;
-            margin: 5px 0;
+            margin: 0;
             opacity: 0;
             animation: fadeInUp 1.2s ease 1.2s forwards;
         }
 
         .cover-date {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--cream);
-            margin-top: 30px;
-            letter-spacing: 3px;
+            margin-top: 15px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
             opacity: 0;
             animation: fadeInUp 1s ease 1.5s forwards;
         }
 
         .cover-verse {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem;
-            color: rgba(245, 240, 225, 0.7);
+            font-size: 0.9rem;
+            color: rgba(245, 240, 225, 0.6);
             font-style: italic;
-            margin-top: 20px;
-            max-width: 400px;
-            line-height: 1.6;
+            margin-top: 25px;
+            max-width: 380px;
+            line-height: 1.7;
             opacity: 0;
             animation: fadeInUp 1s ease 1.8s forwards;
         }
@@ -535,6 +549,13 @@
             font-size: 3rem;
             color: var(--gold);
             opacity: 0.5;
+        }
+
+        .person-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .person-photo::after {
@@ -1120,6 +1141,10 @@
                 font-size: 2.8rem;
             }
 
+            .couple-and {
+                font-size: 1.6rem;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
@@ -1174,6 +1199,19 @@
         @media (max-width: 480px) {
             .couple-names {
                 font-size: 2.2rem;
+            }
+
+            .couple-and {
+                font-size: 1.4rem;
+            }
+
+            .cover-subtitle {
+                letter-spacing: 4px;
+                font-size: 0.65rem;
+            }
+
+            .bismillah {
+                font-size: 0.95rem;
             }
 
             .countdown-item {
@@ -1232,10 +1270,12 @@
         <div class="cover-ornament"></div>
         <div class="cover-content">
             <div class="bismillah">Bismillahirrahmanirrahim</div>
+            <div class="cover-divider"></div>
             <div class="cover-subtitle">The Wedding of</div>
             <div class="couple-names">Irfan Effendi</div>
             <div class="couple-and">&</div>
-            <div class="couple-names">Nur Jihan</div>
+            <div class="couple-names">Nur Jihan Vadilah</div>
+            <div class="cover-divider"></div>
             <div class="cover-date">Minggu, 02 Agustus 2026</div>
             <div class="cover-verse">
                 "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu
@@ -1263,9 +1303,9 @@
                 <div class="person-photo">
                     <span class="photo-placeholder">&#9786;</span>
                 </div>
-                <div class="person-name">Nur Jihan Vadilah</div>
-                <div class="person-fullname">Nur Jihan Vadilah</div>
-                <div class="person-parents">Putri dari Bapak Sukardi & Ibu Buami</div>
+                <div class="person-name">Irfan Effendi, S.H.</div>
+                <div class="person-fullname">Irfan Effendi, S.H.</div>
+                <div class="person-parents">Putra dari Bapak Dahori & Ibu Sulihah</div>
             </div>
 
             <div class="couple-divider animate-on-scroll">
@@ -1276,11 +1316,11 @@
 
             <div class="person animate-right">
                 <div class="person-photo">
-                    <span class="photo-placeholder">&#9786;</span>
+                    <img src="foto mempelai wanita.jpeg" alt="Nur Jihan Vadilah">
                 </div>
-                <div class="person-name">Irfan Effendi, S.H.</div>
-                <div class="person-fullname">Irfan Effendi, S.H.</div>
-                <div class="person-parents">Putra dari Bapak Dahori & Ibu Sulihah</div>
+                <div class="person-name">Nur Jihan Vadilah</div>
+                <div class="person-fullname">Nur Jihan Vadilah</div>
+                <div class="person-parents">Putri dari Bapak Sukardi & Ibu Buami</div>
             </div>
         </div>
     </section>
@@ -1299,11 +1339,11 @@
             <div class="event-card animate-left">
                 <div class="event-icon">&#128141;</div>
                 <div class="event-type">Akad Nikah</div>
-                <div class="event-date">02 AGUSTUS 2026</div>
-                <div class="event-day">Minggu</div>
-                <div class="event-time">08:00 - 10:00 WIB</div>
-                <div class="event-location">Masjid Agung Al-Azhar</div>
-                <div class="event-address">Jl. Sisingamangaraja, Kebayoran Baru, Jakarta Selatan</div>
+                <div class="event-date">-</div>
+                <div class="event-day">-</div>
+                <div class="event-time">-</div>
+                <div class="event-location">-</div>
+                <div class="event-address">-</div>
             </div>
 
             <div class="event-card animate-right">
@@ -1313,7 +1353,12 @@
                 <div class="event-day">Minggu</div>
                 <div class="event-time">18:30 WIB</div>
                 <div class="event-location">KEDIAMAN MEMPELAI PRIA</div>
-                <div class="event-address">Jl. PERMATA, JU'LANTENG RT 002 / RW 002 SAMPANG MADURA</div>
+                <div class="event-address">Sampang Madura, Jl. Permata Ju'lanteng Rt 002 / Rw 002<br>Kediaman Mempelai
+                    Pria</div>
+                <a href="https://maps.google.com" target="_blank">
+                    <img src="barcode lokasi.jpeg" alt="Lokasi Resepsi"
+                        style="width:120px; margin-top:12px; border-radius:8px; cursor:pointer;">
+                </a>
             </div>
         </div>
     </section>
@@ -1523,7 +1568,7 @@
             di dalam tanda-tanda itu benar-benar terdapat bukti bagi kaum yang berpikir."
             <br><strong style="color: var(--gold);">- QS. Ar-Rum : 21 -</strong>
         </div>
-        <div class="closing-names animate-on-scroll">Jihan & Irfan</div>
+        <div class="closing-names animate-on-scroll">Irfan & Jihan</div>
         <div class="closing-thanks animate-on-scroll">Merupakan suatu kehormatan dan kebahagiaan<br>apabila
             Bapak/Ibu/Saudara/i berkenan<br>hadir untuk memberikan doa restu</div>
         <div class="closing-footer animate-on-scroll">
@@ -1614,7 +1659,7 @@
 
         // ============ COUNTDOWN TIMER ============
         function updateCountdown() {
-            const weddingDate = new Date('2026-08-20T08:00:00+07:00');
+            const weddingDate = new Date('2026-08-02T18:30:00+07:00');
             const now = new Date();
             const diff = weddingDate - now;
 
