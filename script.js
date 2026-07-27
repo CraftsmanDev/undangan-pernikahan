@@ -131,7 +131,7 @@ function showToast(message) {
 const EMAILJS_PUBLIC_KEY = 'EnSrB05BR6-WHxRZC';
 const EMAILJS_SERVICE_ID = 'service_lql8pp5';
 const EMAILJS_TEMPLATE_ID = '_PRVQhhU5VVUn_b03nTLG';
-const EMAIL_RECEIVER = ' jihanvadilah260720@gmail.com';
+const EMAIL_RECEIVER = 'jihanvadilah260720@gmail.com';
 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
@@ -177,12 +177,13 @@ function submitRSVP() {
 
     // Kirim via EmailJS
     const templateParams = {
-        from_name: name,
-        from_email: email,
+        title: 'Konfirmasi Kehadiran',
+        name: name,
+        email: email,
+        to_email: EMAIL_RECEIVER,
         guest_count: guest,
         attendance: attendLabel[attend] || attend,
-        message: message || '-',
-        to_email: EMAIL_RECEIVER
+        message: message || '-'
     };
 
     const btn = document.querySelector('.submit-btn');
@@ -272,12 +273,13 @@ function checkH1AndSend() {
         bodyText += `\nRingkasan:\nTotal Konfirmasi: ${data.length}\nHadir: ${hadirCount}\nTidak Hadir: ${tidakCount}\nBelum Pasti: ${belumCount}\nTotal Tamu: ${totalTamu}`;
 
         const templateParams = {
-            from_name: 'Sistem Undangan',
-            from_email: 'system@wedding.com',
+            title: 'Ringkasan RSVP H-1',
+            name: 'Sistem Undangan',
+            email: 'system@wedding.com',
+            to_email: EMAIL_RECEIVER,
             guest_count: String(data.length),
             attendance: `Ringkasan: ${hadirCount} Hadir, ${tidakCount} Tidak Hadir, ${belumCount} Belum Pasti. Total Tamu: ${totalTamu}`,
-            message: bodyText,
-            to_email: EMAIL_RECEIVER
+            message: bodyText
         };
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
