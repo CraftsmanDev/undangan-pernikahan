@@ -129,8 +129,8 @@ function showToast(message) {
 
 // ============ RSVP SUBMIT ============
 const EMAILJS_PUBLIC_KEY = 'EnSrB05BR6-WHxRZC';
-const EMAILJS_SERVICE_ID = 'service_lql8pp5';
-const EMAILJS_TEMPLATE_ID = 'template_e6vlxam';
+const EMAILJS_SERVICE_ID = 'service_tfwc3z3';
+const EMAILJS_TEMPLATE_ID = 'template_x6qvmjf';
 const EMAIL_RECEIVER = 'jihanvadilah260720@gmail.com';
 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
