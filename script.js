@@ -128,12 +128,20 @@ function showToast(message) {
 }
 
 // ============ RSVP SUBMIT ============
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EMAIL_RECEIVER = 'dayatalmahonk07@gmail.com';
+const EMAILJS_PUBLIC_KEY = 'EnSrB05BR6-WHxRZC';
+const EMAILJS_SERVICE_ID = 'service_lql8pp5';
+const EMAILJS_TEMPLATE_ID = '_PRVQhhU5VVUn_b03nTLG';
+const EMAIL_RECEIVER = ' jihanvadilah260720@gmail.com';
 
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+function getRSVPData() {
+    return JSON.parse(localStorage.getItem('rsvpData') || '[]');
+}
+
+function saveRSVPData(data) {
+    localStorage.setItem('rsvpData', JSON.stringify(data));
+}
 
 function submitRSVP() {
     const name = document.getElementById('rsvpName').value.trim();
@@ -153,6 +161,21 @@ function submitRSVP() {
 
     const attendLabel = { hadir: 'Hadir', tidak: 'Tidak Hadir', belum: 'Belum Pasti' };
 
+    // Simpan ke localStorage
+    const rsvpEntry = {
+        no: getRSVPData().length + 1,
+        nama: name,
+        email: email,
+        jumlahTamu: parseInt(guest),
+        kehadiran: attendLabel[attend] || attend,
+        ucapan: message || '-',
+        tanggal: new Date().toLocaleDateString('id-ID')
+    };
+    const allData = getRSVPData();
+    allData.push(rsvpEntry);
+    saveRSVPData(allData);
+
+    // Kirim via EmailJS
     const templateParams = {
         from_name: name,
         from_email: email,
@@ -182,6 +205,91 @@ function submitRSVP() {
             btn.textContent = 'Kirim Konfirmasi';
         });
 }
+
+// ============ GENERATE EXCEL ============
+function generateExcel() {
+    const data = getRSVPData();
+    if (data.length === 0) {
+        showToast('Belum ada data RSVP!');
+        return null;
+    }
+
+    const wsData = [
+        ['No', 'Nama', 'Email', 'Jumlah Tamu', 'Kehadiran', 'Ucapan & Doa', 'Tanggal Konfirmasi']
+    ];
+    data.forEach(item => {
+        wsData.push([item.no, item.nama, item.email, item.jumlahTamu, item.kehadiran, item.ucapan, item.tanggal]);
+    });
+
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+    // Set column widths
+    ws['!cols'] = [
+        { wch: 5 },   // No
+        { wch: 25 },  // Nama
+        { wch: 30 },  // Email
+        { wch: 12 },  // Jumlah Tamu
+        { wch: 15 },  // Kehadiran
+        { wch: 40 },  // Ucapan
+        { wch: 20 }   // Tanggal
+    ];
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Daftar Hadir');
+    return wb;
+}
+
+function downloadExcel() {
+    const wb = generateExcel();
+    if (!wb) return;
+    XLSX.writeFile(wb, 'Daftar_Hadir_undangan.xlsx');
+    showToast('File Excel berhasil didownload!');
+}
+
+// ============ H-1 AUTO SEND EMAIL ============
+function checkH1AndSend() {
+    const weddingDate = new Date('2026-08-02T18:30:00+07:00');
+    const now = new Date();
+    const diffDays = Math.ceil((weddingDate - now) / (1000 * 60 * 60 * 24));
+
+    const lastSent = localStorage.getItem('h1EmailSent');
+    const today = now.toISOString().slice(0, 10);
+
+    if (diffDays <= 1 && diffDays >= 0 && lastSent !== today) {
+        const data = getRSVPData();
+        if (data.length === 0) return;
+
+        let bodyText = 'Daftar Konfirmasi Kehadiran:\n\n';
+        data.forEach(item => {
+            bodyText += `${item.no}. ${item.nama} | ${item.email} | Tamu: ${item.jumlahTamu} | ${item.kehadiran} | ${item.ucapan}\n`;
+        });
+
+        const hadirCount = data.filter(d => d.kehadiran === 'Hadir').length;
+        const tidakCount = data.filter(d => d.kehadiran === 'Tidak Hadir').length;
+        const belumCount = data.filter(d => d.kehadiran === 'Belum Pasti').length;
+        const totalTamu = data.reduce((sum, d) => sum + d.jumlahTamu, 0);
+
+        bodyText += `\nRingkasan:\nTotal Konfirmasi: ${data.length}\nHadir: ${hadirCount}\nTidak Hadir: ${tidakCount}\nBelum Pasti: ${belumCount}\nTotal Tamu: ${totalTamu}`;
+
+        const templateParams = {
+            from_name: 'Sistem Undangan',
+            from_email: 'system@wedding.com',
+            guest_count: String(data.length),
+            attendance: `Ringkasan: ${hadirCount} Hadir, ${tidakCount} Tidak Hadir, ${belumCount} Belum Pasti. Total Tamu: ${totalTamu}`,
+            message: bodyText,
+            to_email: EMAIL_RECEIVER
+        };
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            .then(() => {
+                localStorage.setItem('h1EmailSent', today);
+                console.log('H-1 email terkirim!');
+            })
+            .catch(err => console.error('H-1 email error:', err));
+    }
+}
+
+checkH1AndSend();
 
 // ============ SMOOTH SCROLL FOR NAV ============
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
